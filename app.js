@@ -38,3 +38,29 @@ console.log(operate('*', 2, 5))
 //   return operator
 // }
 // console.log(operate(divide(10, 5)))
+
+
+
+// 4 Create the functions that populate the display when you click the number buttons… you should be storing the ‘display value’ in a variable somewhere for use in the next step.
+
+let displayValue = 0
+
+const visorUI = document.getElementById('visor')
+const numButtons = document.querySelectorAll('.buttons button.number')
+const clearBtn = document.getElementById('clear')
+console.log(visorUI, numButtons)
+
+numButtons.forEach(button => {
+  button.addEventListener('click', (e) => {
+    visorUI.textContent += e.target.value
+    displayValue = parseInt(visorUI.textContent)
+  })
+})
+
+clearBtn.addEventListener('click', clearVisor)
+
+
+
+function clearVisor() {
+  visorUI.textContent = ''
+}
