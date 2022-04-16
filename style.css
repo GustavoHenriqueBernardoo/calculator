@@ -1,77 +1,118 @@
-html {
-  margin: 0;
-  border: 0;
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
+* {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 100vw;
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px;
   height: 100vh;
   overflow: hidden;
+  background: rgb(194, 149, 149);
+  background: radial-gradient(
+    circle,
+    rgba(194, 149, 149, 1) 0%,
+    rgba(92, 92, 92, 1) 100%
+  );
 }
 
 h1 {
-  color: red;
+  color: crimson;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   border: 1px solid black;
   border-radius: 20px;
-  padding: 60px 50px;
-  width: 300px;
-  height: 450px;
+  padding: 10px;
+  width: 400px;
+  height: 600px;
+  overflow: hidden;
+  background-color: darkgray;
+  box-shadow: 15px 5px 1px rgba(0, 0, 0, 0.15);
+}
+
+.visor {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border: 2px solid black;
+  width: 100%;
+  height: 25%;
+  margin: 20px 500px;
+  background-color: green;
+  color: #fff;
   overflow: hidden;
 }
 
-.container .visor {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  background-color: transparent;
-  border: 2px solid black;
-  width: 100%;
-  height: 50px;
-  margin: 20px 500px;
-  padding: 10px;
-  border-radius: 30px;
-  background-color: green;
-  color: #fff;
-}
-
 .grid-container {
-  border: 2px gray solid;
   width: 100%;
   height: 100%;
   display: grid;
-  column-gap: 10px;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'ac delete percentage divide'
+    'seven eight nine multiply'
+    'four five six minus'
+    'one two three plus'
+    'zero decimal equal equal';
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 15px;
+  padding: 5px 2px;
 }
-.top-button {
-  grid-column: 1 / 4;
-  height: 0;
+
+.button {
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 20px;
+  border: none;
+  box-shadow: 5px 4px 1px rgba(0, 0, 0, 0.15);
 }
 
 .clear {
-  width: 100%;
+  grid-area: ac;
+}
+.delete {
+  grid-area: delete;
+}
+.percentage {
+  grid-area: percentage;
+}
+.divide {
+  grid-area: divide;
+}
+.multiply {
+  grid-area: multiply;
+}
+.minus {
+  grid-area: minus;
+}
+.plus {
+  grid-area: plus;
 }
 
-.buttons {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-row: 2 /6;
-  gap: 5px;
+.main-color {
+  background-color: crimson;
+  color: #fff;
+  font-weight: bold;
 }
 
-.operators {
-  display: grid;
-  grid-row: 2/6;
-  grid-column: 2 / 4;
+.equal {
+  grid-area: equal;
+  background-color: rgba(82, 82, 82, 0.671);
+  color: crimson;
+}
+
+footer {
+  display: fixed;
+  bottom: 10px;
 }
