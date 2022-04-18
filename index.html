@@ -10,7 +10,7 @@
   <body>
     <h1>Calculator</h1>
     <div class="container">
-      <div id="visor" class="visor"></div>
+      <div id="visor" class="visor">0</div>
       <div class="grid-container">
         <button id="clear" class="button clear main-color">AC</button>
         <button id="delete" class="button delete main-color"><=</button>
@@ -25,12 +25,14 @@
         <button value="2" class="button number two">2</button>
         <button value="3" class="button number three">3</button>
         <button value="0" class="button number zero">0</button>
-        <button value="." class="button decimal">.</button>
-        <button value="=" class="button equal main-color">=</button>
-        <button class="button divide main-color">÷</button>
-        <button class="button multiply main-color">&times;</button>
-        <button class="button minus main-color">-</button>
-        <button class="button plus main-color">+</button>
+        <button id="decimal" value="." class="button decimal">.</button>
+        <button id="equal" value="=" class="button equal main-color">=</button>
+        <button id="divide" class="button divide main-color">÷</button>
+        <button id="multiply" class="button multiply main-color">
+          &times;
+        </button>
+        <button id="minus" class="button minus main-color">-</button>
+        <button id="plus" class="button plus main-color">+</button>
       </div>
     </div>
     <footer>&copy;Gustavo Bernardo</footer>

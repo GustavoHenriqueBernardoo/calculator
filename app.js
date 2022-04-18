@@ -39,19 +39,28 @@ console.log(operate('*', 2, 5))
 // }
 // console.log(operate(divide(10, 5)))
 
-
-
-// 4 Create the functions that populate the display when you click the number buttons… you should be storing the ‘display value’ in a variable somewhere for use in the next step.
-
 let displayValue = 0
 
+// Variable declarations
 const visorUI = document.getElementById('visor')
-const numButtons = document.querySelectorAll('.grid-container .button')
+const numButtons = document.querySelectorAll('.grid-container .number')
 const clearBtn = document.getElementById('clear')
-console.log(visorUI, numButtons)
+const deleteBtn = document.getElementById('delete')
+const percentageBtn = document.getElementById('percentage')
+const decimalBtn = document.getElementById('decimal')
+const equalBtn = document.getElementById('equal')
+const divideBtn = document.getElementById('divide')
+const multiplyBtn = document.getElementById('multiply')
+const minusBtn = document.getElementById('minus')
+const plusBtn = document.getElementById('plus')
 
+
+// Loop through buttons that are numbers and adding an event Listener to them
 numButtons.forEach(button => {
   button.addEventListener('click', (e) => {
+    if (visorUI.textContent === '0') {
+      visorUI.textContent = ''
+    }
     visorUI.textContent += e.target.value
     displayValue = parseInt(visorUI.textContent)
   })
@@ -62,6 +71,37 @@ clearBtn.addEventListener('click', clearVisor)
 
 
 function clearVisor() {
-  visorUI.textContent = ''
+  visorUI.textContent = '0'
   displayValue.textContent = ''
 }
+
+let firstValue = 0
+// let secondValue = 0
+let sign = ''
+
+plusBtn.addEventListener('click', () => {
+  firstValue = +visorUI.textContent
+  visorUI.textContent !== 0 || visorUI.textContent !== '' ? clearVisor() :
+    console.log('+')
+  sign = '+'
+})
+
+
+minusBtn.addEventListener('click', () => {
+  clearVisor()
+  return '-'
+})
+multiplyBtn.addEventListener('click', () => {
+  clearVisor()
+  return '*'
+})
+divideBtn.addEventListener('click', () => {
+  clearVisor()
+  return '/'
+})
+
+equalBtn.addEventListener('click', () => {
+  visorUI.textContent = operate(sign, firstValue, +visorUI.textContent)
+
+})
+
