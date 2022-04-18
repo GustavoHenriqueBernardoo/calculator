@@ -78,6 +78,27 @@ h1 {
   box-shadow: 5px 4px 1px rgba(0, 0, 0, 0.15);
 }
 
+.button:hover,
+.button:active {
+  background-color: rgba(0, 0, 0, 0.15);
+  transform: scale(1.1);
+}
+
+.main-color:hover,
+.main-color:active {
+  background-color: rgb(140, 9, 35);
+}
+
+.button:active,
+.main-color:active {
+  transform: scale(0.9);
+}
+
+.equal:hover,
+.equal:active {
+  color: #fff;
+}
+
 .clear {
   grid-area: ac;
 }

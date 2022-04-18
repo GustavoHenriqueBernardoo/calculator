@@ -46,7 +46,7 @@ console.log(operate('*', 2, 5))
 let displayValue = 0
 
 const visorUI = document.getElementById('visor')
-const numButtons = document.querySelectorAll('.calculator-keys button.number')
+const numButtons = document.querySelectorAll('.grid-container .button')
 const clearBtn = document.getElementById('clear')
 console.log(visorUI, numButtons)
 
