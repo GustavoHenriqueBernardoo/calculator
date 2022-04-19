@@ -81,7 +81,9 @@ h1 {
 
 .button:hover,
 .button:active {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(132, 132, 132, 0.8);
+  box-shadow: 5px 4px 1px rgba(0, 0, 0, 0);
+
   transform: scale(1.1);
 }
 
@@ -92,6 +94,7 @@ h1 {
 
 .button:active,
 .main-color:active {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
   transform: scale(0.9);
 }
 
