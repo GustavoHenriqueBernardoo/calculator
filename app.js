@@ -1,22 +1,18 @@
 // Variable declarations
-const visorUI = document.getElementById('visor')
-const currentValueUI = document.getElementById('current-value')
-const previousValueUI = document.getElementById('previous-value')
+const displayCalculator = document.getElementById('visor')
+// const displayPrevious = document.getElementById('previous-value')
 const numButtons = document.querySelectorAll('.grid-container .number')
+const operatorButtons = document.querySelectorAll('.operator')
 const clearBtn = document.getElementById('clear')
 const deleteBtn = document.getElementById('delete')
-const percentageBtn = document.getElementById('percentage')
 const decimalBtn = document.getElementById('decimal')
 const equalBtn = document.getElementById('equal')
-// const operatorsBtn = document.querySelectorAll('#operators')
-const divideBtn = document.getElementById('divide')
-const multiplyBtn = document.getElementById('multiply')
-const minusBtn = document.getElementById('minus')
-const plusBtn = document.getElementById('plus')
-let displayValue = 0
+
+displayCalculator.textContent = '0'
 let firstValue = 0
-let result = 0
-let sign = ''
+let operatorValue = ''
+let nextValue = false
+
 
 function add(...num) {
   return num.reduce((a, b) => a += b)
@@ -41,105 +37,108 @@ function operate(operator, n1, n2) {
   if (operator == '+') return add(n1, n2)
   else if (operator == '-') return subtract(n1, n2)
   else if (operator == '*') return multiply(n1, n2)
-  else if (operator == '/') return divide(n1, n2)
-  else return 'Please enter a valid symbol'
-}
-console.log(operate('*', 2, 5))
+  else if (operator == '/') {
+    if (n1 === 0 | n2 === 0) {
+      alert('Sorry! I am going to prevent you from crash my calculator LOL')
+      clearFunc()
+    } else {
+      return divide(n1, n2)
 
-
-// I will use this later on
-
-// function operator(...num) {
-//   return operator(num)
-// }
-// function operate(operator) {
-//   return operator
-// }
-// console.log(operate(divide(10, 5)))
-
-
-// Loop through buttons that are numbers and adding an event Listener to them
-numButtons.forEach(button => {
-  button.addEventListener('click', (e) => {
-    if (visorUI.textContent === '0') {
-      visorUI.textContent = ''
     }
-    visorUI.textContent += e.target.value
-    displayValue = parseInt(visorUI.textContent)
-  })
-})
+  }
 
-
-function clearVisor() {
-  visorUI.textContent = 0
-  displayValue.textContent = ''
-  result = 0
-  sign = ''
+  // else return 'Please enter a valid symbol'
 }
-// console.log(operatorsBtn)
-// operatorsBtn.forEach(operator => {
-//   operator.addEventListener('click', () => {
-//     if (operator.innerText === '+') return console.log('+')
-//   })
-// })
+// console.log(operate('*', 2, 5))
 
-clearBtn.addEventListener('click', clearVisor)
-console.log(plusBtn)
-plusBtn.addEventListener('click', () => {
-  // if (firstValue !== 0 || result > 0) {
-  //   console.log('enter here')
-  // result = operate('+', firstValue, +visorUI.textContent)
-  //   console.log(result)
-  //   visorUI.textContent = result
-  //   firstValue = result
-  //   visorUI.textContent = ''
-  // } else {
-  // if (result > 0) {
-  //   // console.log('result', result)
-  //   visorUI.textContent = result
-  //   firstValue = result
 
-  // } else {
-  //   // console.log('else')
-  //   firstValue = +visorUI.textContent
-  // }
+// Function which update the display
+function updateDisplay(number) {
 
-  // if (visorUI.textContent !== 0 || visorUI.textContent !== '') {
-  //   visorUI.textContent = ''
+  // Replace display content if first value was assigned
+  if (nextValue) {
+    displayCalculator.textContent = number
+    nextValue = false
+  } else {
+    // if display value is 0, replace with the number entered
+    const displayValue = displayCalculator.textContent
+    displayCalculator.textContent = displayValue === '0' ? number : displayValue + number
 
-  //   sign = '+'
-  //   console.log(firstValue, result)
-  //   // console.log(add(firstValue, +visorUI.textContent))
-  //   result = firstValue
-  // }
-  firstValue = +visorUI.textContent
-  if (visorUI.textContent !== 0 || visorUI.textContent !== '') visorUI.textContent = ''
-  sign = '+'
+  }
+}
+
+
+function updateOperate(operator) {
+
+  // Setting the first value to a variable
+  const currentValue = parseFloat(displayCalculator.textContent)
+
+  if (operator === 'delete') {
+    displayCalculator.textContent = displayCalculator.textContent.substring(0, displayCalculator.textContent.length - 1)
+    return
+  }
+
+  // Prevent enter multiple operators
+  if (operatorValue && nextValue) {
+    operatorValue = operator
+    return
+  }
+  // Checking if firstValue is 0 to assign the first value to current value
+  if (!firstValue) {
+    firstValue = currentValue
+  }
+  else {
+    console.log(firstValue, operatorValue, currentValue)
+    const result = operate(operatorValue, firstValue, currentValue)
+    displayCalculator.textContent = result
+    firstValue = result
+    console.log(result)
+  }
+  if (operator === '=') {
+    displayCalculator.textContent = firstValue
+  }
+
+  // Ready to store the next value
+  nextValue = true
+  operatorValue = operator
+
+
+  // console.log('first value', firstValue)
+  // console.log('Operator value', operatorValue)
+}
+
+function decimalNum() {
+  if (nextValue) return
+
+  // if no decimalBtn, add one
+  if (!displayCalculator.textContent.includes('.')) {
+    displayCalculator.textContent = `${displayCalculator.textContent}.`
+  }
+}
+
+// Clear all the variable values
+function clearFunc() {
+  displayCalculator.textContent = '0'
+  firstValue = 0
+  operatorValue = ''
+  nextValue = false
+}
+
+numButtons.forEach(numButton =>
+  numButton.addEventListener('click', () => updateDisplay(numButton.value)))
+
+// Operator buttons loop 
+operatorButtons.forEach(operatorButton => {
+  // checking if the operator button contains a specific class
+  if (operatorButton.classList.contains('operator')) {
+    operatorButton.addEventListener('click', () => updateOperate(operatorButton.value)
+    )
+  }
 })
 
-minusBtn.addEventListener('click', () => {
-  firstValue = +visorUI.textContent
-  if (visorUI.textContent !== 0 || visorUI.textContent !== '') visorUI.textContent = ''
-  sign = '-'
-})
 
-multiplyBtn.addEventListener('click', () => {
-  firstValue = +visorUI.textContent
-  if (visorUI.textContent !== 0 || visorUI.textContent !== '') visorUI.textContent = ''
-  sign = '*'
-})
-
-divideBtn.addEventListener('click', () => {
-  firstValue = +visorUI.textContent
-  if (visorUI.textContent !== 0 || visorUI.textContent !== '') visorUI.textContent = ''
-  sign = '/'
-})
-
-
-equalBtn.addEventListener('click', () => {
-  visorUI.textContent = operate(sign, firstValue, +visorUI.textContent)
-
-})
-
-
-// 12 + 7 - 5 * 3 = should yield 42
+// Buttons event Listener
+clearBtn.addEventListener('click', () => clearFunc())
+decimalBtn.addEventListener('click', () => decimalNum())
+equalBtn.addEventListener('click', (e) => updateOperate(e.target.value))
+deleteBtn.addEventListener('click', () => { updateOperate('delete') })

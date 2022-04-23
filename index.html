@@ -11,13 +11,16 @@
     <h1>Calculator</h1>
     <div class="container">
       <div id="visor" class="visor">
-        <div id="current-value"></div>
-        <div id="previous-value"></div>
+        <!-- <div id="current-value"></div> -->
+        <!-- <div id="previous-value">2 + 2</div> -->
       </div>
       <div class="grid-container">
         <button id="clear" class="button clear main-color">AC</button>
         <button id="delete" class="button delete main-color"><=</button>
-        <button id="percentage" class="button percentage main-color">%</button>
+        <button
+          id="percentage"
+          class="button percentage main-color operator"
+        ></button>
         <button value="7" class="button number seven">7</button>
         <button value="8" class="button number eight">8</button>
         <button value="9" class="button number nine">9</button>
@@ -30,12 +33,22 @@
         <button value="0" class="button number zero">0</button>
         <button id="decimal" value="." class="button decimal">.</button>
         <button id="equal" value="=" class="button equal main-color">=</button>
-        <button id="divide" class="button divide main-color">÷</button>
-        <button id="multiply" class="button multiply main-color">
+        <button id="divide" value="/" class="button divide main-color operator">
+          ÷
+        </button>
+        <button
+          id="multiply"
+          value="*"
+          class="button multiply main-color operator"
+        >
           &times;
         </button>
-        <button id="minus" class="button minus main-color">-</button>
-        <button id="plus" class="button plus main-color">+</button>
+        <button id="minus" value="-" class="button minus main-color operator">
+          -
+        </button>
+        <button id="plus" value="+" class="button plus main-color operator">
+          +
+        </button>
       </div>
     </div>
     <footer>&copy;Gustavo Bernardo</footer>

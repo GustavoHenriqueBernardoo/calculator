@@ -133,11 +133,19 @@ h1 {
 
 .equal {
   grid-area: equal;
-  background-color: rgba(82, 82, 82, 0.671);
+  background-color: rgba(0, 0, 0, 0.671);
   color: crimson;
 }
 
 footer {
   display: fixed;
   bottom: 10px;
+}
+
+.percentage {
+  background-color: darkgray;
+  box-shadow: 0 0 0 0;
+}
+.percentage:hover {
+  background-color: darkgray;
 }
